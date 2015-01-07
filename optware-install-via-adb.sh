@@ -242,8 +242,11 @@ t_remount_rw /
 echo "== Initializing optware environment =="
 t_rm_rf $tmp_dir
 t_mkdir_p $tmp_dir
+adb shell su -c "chown shell:shell $tmp_dir"
 
 t_mkdir_p $OPTWARE_DIR
+adb shell su -c "chown shell:shell $OPTWARE_DIR"
+
 t_cd_ln . -s $OPTWARE_DIR /opt
 
 t_mkdir_p $OPTWARE_DIR/rootbin
@@ -375,10 +378,12 @@ read
 # we need to use ipkg to reinstall itself and all those dependencies,
 # to make sure they're installed and configured properly.
 #
-adb shell PATH=/opt/bin:/bin /opt/bin/ipkg update
-adb shell PATH=/opt/bin:/bin /opt/bin/ipkg install ipkg-opt
-adb shell PATH=/opt/bin:/bin /opt/bin/ipkg install wget
-adb shell PATH=/opt/bin:/bin /opt/bin/ipkg install busybox
+
+adb shell su -c "/opt/bin/ipkg update"
+adb shell su -c "/opt/bin/ipkg install ipkg-opt"
+adb shell su -c "/opt/bin/ipkg update"
+adb shell su -c "/opt/bin/ipkg install wget"
+adb shell su -c "/opt/bin/ipkg install busybox"
 
 echo "== Cleaning device tmp directory =="
 t_rm_rf $tmp_dir
