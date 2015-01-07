@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # NSLU2-Linux Optware setup script for Android
 # Copyright (c) 2012 Paul Sokolovsky <pfalcon@users.sourceforge.net>
