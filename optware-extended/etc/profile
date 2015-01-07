@@ -1,0 +1,11 @@
+if [ "$EUID" = "0" ] || [ "$USER" = "root" ] ; then
+    PS1="$USER@`uname -n` # "
+    PATH="/opt/sbin:/opt/bin:/system/xbin:/sbin:/system/sbin:/system/bin"
+else
+    PS1="$USER@`uname -n` $ "
+    PATH="/opt/bin:/system/xbin:/system/bin"
+fi
+export PATH
+export PS1
+
+export LD_LIBRARY_PATH="/opt/lib:/system/lib"
